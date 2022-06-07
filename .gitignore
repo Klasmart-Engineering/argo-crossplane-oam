@@ -1,0 +1,8 @@
+**/secrets/*
+!**/secrets/holder.txt
+.terraform*
+terraform.tfstate*
+**/age_secret.yaml
+**/repo-creds.yaml
+**/repo-creds.enc.yaml
+**/argo-cd/charts/*
