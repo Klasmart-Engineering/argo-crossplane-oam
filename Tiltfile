@@ -67,7 +67,7 @@ helm_remote('crossplane', repo_name='crossplane-stable', namespace='crossplane-s
 
 # Kubevela (OAM)
 namespace_create('vela-system')
-helm_remote('vela-core', repo_name='kubevela', namespace='crossplane-system', repo_url='https://charts.kubevela.net/core')
+helm_remote('vela-core', repo_name='kubevela', namespace='vela-system', repo_url='https://charts.kubevela.net/core')
 
 local_resource('localstack-crossplane', cmd='./scripts/localstack-crossplane.sh', resource_deps=['crossplane'])
 

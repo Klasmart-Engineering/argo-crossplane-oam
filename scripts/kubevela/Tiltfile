@@ -1,0 +1,7 @@
+#Extensions
+load('ext://helm_resource', 'helm_resource')
+load('ext://namespace', 'namespace_create', 'namespace_inject')
+load('ext://helm_remote', 'helm_remote')
+
+helm_remote(chart='localstack', repo_url='https://helm.localstack.cloud', repo_name='localstack-repo', values='../../demo/values/localstack/values.yaml')
+k8s_resource('localstack', labels=['common-infrastructure'], port_forwards=4566)

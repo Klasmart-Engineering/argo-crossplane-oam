@@ -1,0 +1,54 @@
+apiVersion: core.oam.dev/v1beta1
+kind: ComponentDefinition
+metadata:
+  name: aws-rds
+  namespace: vela-system
+  annotations:
+    definition.oam.dev/description: "aws Cloud RDS Resource"
+spec:
+  workload:
+    definition:
+      apiVersion: dynamodb.aws.crossplane.io/v1alpha1
+      kind: Table
+  schematic:
+    kube:
+      template:
+        apiVersion: dynamodb.aws.crossplane.io/v1alpha1
+        kind: Table
+        metadata:
+          name: sample-table
+        spec:
+          forProvider:
+            region: us-east-1
+            attributeDefinitions:
+              - attributeName: attribute1
+                attributeType: S
+            keySchema:
+              - attributeName: attribute1
+                keyType: HASH
+            billingMode: PROVISIONED
+            provisionedThroughput:
+              readCapacityUnits: 1
+              writeCapacityUnits: 1
+            streamSpecification:
+              streamEnabled: true
+              streamViewType: NEW_AND_OLD_IMAGES
+          providerConfigRef:
+            name: example
+          writeConnectionSecretToRef:
+            name: sample-table
+            namespace: crossplane-system
+        # parameter: {
+        #     // +usage=RDS engine
+        #     engine: *"mysql" | string
+        #     // +usage=The version of RDS engine
+        #     engineVersion: *"8.0" | string
+        #     // +usage=The instance class for the RDS
+        #     instanceClass: *"rds.mysql.c1.large" | string
+        #     // +usage=RDS username
+        #     username: string
+        #     // +usage=Secret name which RDS connection will write to
+        #     secretName: string
+        # }
+
+
