@@ -1,7 +1,7 @@
 
 print("""
 -----------------------------------------------------------------
-✨  GitOps platform demonstration. 
+✨  GitOps platform demonstration.
    Includes ArgoCD, Crossplane, Kubevela (OAM), Loki.
 -----------------------------------------------------------------
 """.strip())
@@ -27,11 +27,11 @@ chart_path="./"
 
 # Configuration Scripts
 local_resource('setup-github', cmd='./scripts/setup-github.sh')
-# local_resource('setup-argo', cmd='./scripts/setup-argo.sh', resource_deps=['setup-github'])
+local_resource('setup-argo', cmd='./scripts/setup-argo.sh', resource_deps=['setup-github'])
 local_resource('setup-key', cmd='./scripts/setup-key.sh')
 
 
-# SOPS 
+# SOPS
 namespace_create('sops')
 
 helm_resource(

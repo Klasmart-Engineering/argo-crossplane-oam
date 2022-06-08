@@ -16,7 +16,7 @@ spec:
       project: default
       syncPolicy:
         automated:
-          allowEmpoty: true
+          allowEmpty: true
           prune: true
       source:
         repoURL: https://github.com/jamesw201/oam-test.git

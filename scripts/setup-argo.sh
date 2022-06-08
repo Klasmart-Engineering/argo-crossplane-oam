@@ -1,7 +1,8 @@
 SECRETS_DIR="./demo/secrets"
 CONFIG_FILE="$SECRETS_DIR/config.yaml"
 ARGO_DIR="./demo/charts/argo-cd"
-ARGO_VALUE_FILE="$ARGO_DIR/values.yaml"
+# ARGO_VALUE_FILE="$ARGO_DIR/values.yaml"
+ARGO_VALUE_FILE="./demo/values/argocd/values.yaml"
 CRED_TEMP_FILE="$ARGO_DIR/templates/argocd-configs/repo-creds.yaml"
 CRED_FILE="$ARGO_DIR/templates/argocd-configs/repo-creds.enc.yaml"
 PRIVATE_KEY=$(yq e '.argo.privateKey' $CONFIG_FILE)
@@ -26,15 +27,15 @@ spec:
         argocd.argoproj.io/secret-type: repo-creds
       stringData:
         type: git
-        url: 
+        url:
       data:
-        sshPrivateKey: 
+        sshPrivateKey:
     - name: demo-manifest-repo
       labels:
         argocd.argoproj.io/secret-type: repository
       stringData:
         type: git
-        url: 
+        url:
 EOF
 
 url="$BASE_REPO" yq e '.spec.secretTemplates[0].stringData.url = env(url)' -i $CRED_TEMP_FILE
