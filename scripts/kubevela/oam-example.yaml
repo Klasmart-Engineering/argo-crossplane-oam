@@ -1,0 +1,10 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: rds-toolkit
+spec:
+  components:
+    - name: aws-rds-experiment
+      type: aws-rds
+      properties:
+        name: mynewtable

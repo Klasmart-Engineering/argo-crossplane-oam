@@ -10,6 +10,10 @@ k3d registry delete k3d-registry.localhost && k3d cluster delete k3s-default
 
 k3d registry create registry.localhost --port 12345
 
+export KUBECONFIG=$(k3d kubeconfig write k3s-default)
+or if you're using the velad cli
+export KUBECONFIG=$(velad kubeconfig --name default --host)
+
 ## Dependencies
 
 This repo assumes you already have working knowledge on setting up and deploying to kubernetes clusters.  This tutorial uses tilt, which assumes you have a working cluster running that can be connected to from the machine you are running the demo on.
